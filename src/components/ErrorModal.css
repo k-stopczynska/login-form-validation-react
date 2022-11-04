@@ -1,0 +1,65 @@
+@keyframes fadein {
+  0% {
+    scale: 0;
+  }
+  25% {
+    scale: 0.25;
+  }
+  50% {
+    scale: 0.5;
+  }
+  75% {
+    scale: 0.75;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.overlay {
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scale: 0;
+}
+
+.overlay.empty-input,
+.overlay.invalid-age {
+  animation: fadein 1s linear forwards;
+  z-index: 1000;
+}
+
+.error-modal__content {
+  background-color: white;
+  max-width: 50%;
+  border: 2px solid darkgray;
+  border-radius: 13px;
+  box-shadow: 1px 2px 10px lightgray;
+}
+
+.error-modal__content h1 {
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  background-color: purple;
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem;
+}
+
+.error-modal__content p {
+  padding: 0.8rem;
+}
+
+.button {
+  background: rgb(106, 8, 106);
+  color: white;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  right: 0.8rem;
+}

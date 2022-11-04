@@ -40,25 +40,24 @@ function App() {
       : setIsValid("everything under Ctrl");
   };
 
-  return isValid === "everything under Ctrl" ? (
+  const errorModalClassHandler = () => {
+    return isValid === "empty input"
+      ? "empty-input"
+      : isValid === "invalid-age"
+      ? "invalid age"
+      : "hidden";
+  };
+
+  return (
     <div className="App">
       <LoginForm
         onAddingNewUser={addingNewUserHandler}
         onInvalidForm={invalidFormHandler}
       />
       <LoginList users={newUsers} />
-    </div>
-  ) : (
-    <div className="App">
-      <ErrorModal />
+      <ErrorModal className={errorModalClassHandler()} />
     </div>
   );
-  /* <LoginForm
-        onAddingNewUser={addingNewUserHandler}
-        onInvalidForm={invalidFormHandler}
-      />
-      <LoginList users={newUsers} />
-      <ErrorModal/> */
 }
 
 export default App;

@@ -1,15 +1,22 @@
-import './ErrorModal.css';
+import "./ErrorModal.css";
 
 const ErrorModal = (props) => {
-return (
-    <div className="overlay">
-        <div className="error-modal-content">
-            <h1>Invalid Input</h1>
-            <p>Please enter a valid name and age (non-empty values).</p>
-            <p>Please enter a valid age (more than 0)</p>
-            <button type="button">Okay</button>
-        </div>
+
+    const onClickHandler = () => {
+        console.log('escaping error modal')
+    }
+  return (
+    <div className={`overlay ${props.className}`} onClick={onClickHandler}>
+      <div className="error-modal__content">
+        <h1>Invalid Input</h1>
+        {props.className === 'invalid-age' ?  <p>Please enter a valid age (more than 0)</p> :
+         <p>Please enter a valid name and age (non-empty values).</p>
+        }
+        <button type="button" className="button" onClick={onClickHandler}>
+          Okay
+        </button>
+      </div>
     </div>
-)
-}
+  );
+};
 export default ErrorModal;
