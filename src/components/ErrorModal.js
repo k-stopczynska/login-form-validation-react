@@ -3,7 +3,7 @@ import "./ErrorModal.css";
 const ErrorModal = (props) => {
 
     const onClickHandler = () => {
-        console.log('escaping error modal')
+       props.newClass('')
     }
   return (
     <div className={`overlay ${props.className}`} onClick={onClickHandler}>

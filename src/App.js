@@ -43,9 +43,9 @@ function App() {
   const errorModalClassHandler = () => {
     return isValid === "empty input"
       ? "empty-input"
-      : isValid === "invalid-age"
-      ? "invalid age"
-      : "hidden";
+      : isValid === "invalid age"
+      ? "invalid-age"
+      : "everything under Ctrl";
   };
 
   return (
@@ -55,7 +55,7 @@ function App() {
         onInvalidForm={invalidFormHandler}
       />
       <LoginList users={newUsers} />
-      <ErrorModal className={errorModalClassHandler()} />
+      <ErrorModal className={errorModalClassHandler()} newClass={setIsValid} />
     </div>
   );
 }
