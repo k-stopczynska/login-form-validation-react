@@ -14,38 +14,35 @@ const LoginForm = (props) => {
   };
 
   const changeAgeHandler = (e) => {
-    if (e.target.value <= 0) {
-      return;
-    } else {
-    setUserLogin((prevState) => {
-      return {
-        ...prevState,
-        userAge: e.target.value,
-      };
-    });
-  }
+      setUserLogin((prevState) => {
+        return {
+          ...prevState,
+          userAge: e.target.value,
+        };
+      });
   };
-
-  const inputValidation = ()=> {
-    if (!changeAgeHandler || userLogin.userName === '' || userLogin.userAge === '') {
-return false;
-    }
-  }
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (inputValidation) {
-      return
+    if (+userLogin.userAge < 0) {
+      let message = 'invalid age';
+      props.onInvalidForm(message);
+      return;
+    } else if (userLogin.userName === '' || userLogin.userAge === '') {
+      let message="empty input";
+      props.onInvalidForm(message);
+      return;
     } else {
-    const userData = {
-      name: userLogin.userName,
-      age: userLogin.userAge,
-      id: Math.random().toString(),
-    };
-    props.onAddingNewUser(userData);
-    setUserLogin({ userName:"", userAge:"" })
-  };
-}
+      const userData = {
+        name: userLogin.userName,
+        age: userLogin.userAge,
+        id: Math.random().toString(),
+      };
+      props.onAddingNewUser(userData);
+      setUserLogin({ userName: "", userAge: "" });
+    }
+  }
+
 
   return (
     <form className="login-form" type="submit" onSubmit={onSubmitHandler}>
@@ -54,7 +51,7 @@ return false;
           <label for="username" name="username">
             Username
           </label>
-          <input type="text" id="username" onChange={changeNameHandler}></input>
+          <input type="text" id="username" onChange={changeNameHandler} value={userLogin.userName}></input>
         </div>
         <div className="form-control">
           <label for="age" name="age">
@@ -65,6 +62,7 @@ return false;
             id="age"
             step="1"
             onChange={changeAgeHandler}
+            value={userLogin.userAge}
           ></input>
         </div>
       </div>

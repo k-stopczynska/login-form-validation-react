@@ -30,11 +30,20 @@ function App() {
     });
   };
 
+  const invalidFormHandler = (message) => {
+    message === "empty input"
+      ? console.log("empty input")
+      : message === "invalid age"
+      ? console.log("invalid age")
+      : console.log("everything under Ctrl");
+  };
 
-  
   return (
     <div className="App">
-      <LoginForm onAddingNewUser={addingNewUserHandler} />
+      <LoginForm
+        onAddingNewUser={addingNewUserHandler}
+        onInvalidForm={invalidFormHandler}
+      />
       <LoginList users={newUsers} />
     </div>
   );
