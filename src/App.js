@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import LoginList from "./components/LoginList";
+import ErrorModal from "./components/ErrorModal";
 
 const users = [
   {
@@ -23,6 +24,7 @@ const users = [
 
 function App() {
   const [newUsers, setNewUsers] = useState(users);
+  const [isValid, setIsValid] = useState("everything under Ctrl");
 
   const addingNewUserHandler = (userData) => {
     setNewUsers((prevState) => {
@@ -32,13 +34,13 @@ function App() {
 
   const invalidFormHandler = (message) => {
     message === "empty input"
-      ? console.log("empty input")
+      ? setIsValid("empty input")
       : message === "invalid age"
-      ? console.log("invalid age")
-      : console.log("everything under Ctrl");
+      ? setIsValid("invalid age")
+      : setIsValid("everything under Ctrl");
   };
 
-  return (
+  return isValid === "everything under Ctrl" ? (
     <div className="App">
       <LoginForm
         onAddingNewUser={addingNewUserHandler}
@@ -46,7 +48,17 @@ function App() {
       />
       <LoginList users={newUsers} />
     </div>
+  ) : (
+    <div className="App">
+      <ErrorModal />
+    </div>
   );
+  /* <LoginForm
+        onAddingNewUser={addingNewUserHandler}
+        onInvalidForm={invalidFormHandler}
+      />
+      <LoginList users={newUsers} />
+      <ErrorModal/> */
 }
 
 export default App;
